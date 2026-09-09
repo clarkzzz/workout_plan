@@ -201,6 +201,31 @@
     position:absolute; inset:0; width:100%; height:100%; border:0;
   }
   .video-caption{ font-size:0.75rem; color:var(--ink-soft); margin-top:.4rem; }
+  .video-links{
+    display:flex;
+    gap:0.5rem;
+    flex-wrap:wrap;
+    margin-top:0.6rem;
+  }
+  .video-link{
+    display:inline-flex;
+    align-items:center;
+    gap:0.35rem;
+    font-size:0.75rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    text-decoration:none;
+    padding:0.3rem 0.6rem;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--paper);
+    transition:color .15s, border-color .15s, background .15s;
+  }
+  .video-link:hover{
+    color:var(--ink);
+    border-color:var(--coral);
+    background:#fff;
+  }
 
   /* ---------- COOLDOWN ---------- */
   .cooldown{
@@ -359,12 +384,12 @@ const days = [
     desc:"Lower-body led session — squat and hinge patterns, plus rowing and pressing to keep the upper body balanced.",
     warmup:"March in place (2 min) → 10 bodyweight squats → 10 arm circles each way → 8 cat-cows → 8 hip circles each way.",
     exercises:[
-      {name:"Kettlebell Goblet Squat", sets:"3 × 10", icon:"squat", query:"kettlebell goblet squat form tutorial", cue:"Chest up, sit your hips back, drive through your heels.", note:"The core squat pattern of the whole plan — worth spending real time getting comfortable here."},
-      {name:"Dumbbell Romanian Deadlift", sets:"3 × 10", icon:"hinge", query:"dumbbell romanian deadlift form beginner", cue:"Soft knees, hinge at the hips, feel a stretch through the hamstrings.", note:"Keep the dumbbells close to your legs throughout the movement."},
-      {name:"Dumbbell Bent-Over Row", sets:"3 × 10", icon:"row", query:"dumbbell bent over row form tutorial", cue:"Flat back, pull the elbows back, squeeze the shoulder blades together.", note:"Hinge forward from the hips first, then row — don't round the spine."},
-      {name:"Kettlebell Glute Bridge", sets:"3 × 12", icon:"hinge", query:"kettlebell glute bridge form tutorial", cue:"Squeeze the glutes hard at the top, pause for a second.", note:"Rest the kettlebell across your hip crease, holding it steady with both hands."},
-      {name:"Standing Dumbbell Overhead Press", sets:"2 × 10", icon:"press", query:"standing dumbbell overhead press form beginner", cue:"Light weight to start — control the lowering phase.", note:"Press straight up, not forward; avoid arching the lower back."},
-      {name:"Plank", sets:"3 × 20–30 sec", icon:"plank", query:"plank proper form beginner", cue:"Straight line from shoulders to heels — don't let the hips sag.", note:"Mat exercise. Build the hold time gradually week over week."}
+      {name:"Kettlebell Goblet Squat", sets:"3 × 10", icon:"squat", videoId:"QilYZ20kVfM", query:"kettlebell goblet squat form tutorial", cue:"Chest up, sit your hips back, drive through your heels.", note:"The core squat pattern of the whole plan — worth spending real time getting comfortable here."},
+      {name:"Dumbbell Romanian Deadlift", sets:"3 × 10", icon:"hinge", videoId:"_oyxCn2iSjU", query:"dumbbell romanian deadlift form beginner", cue:"Soft knees, hinge at the hips, feel a stretch through the hamstrings.", note:"Keep the dumbbells close to your legs throughout the movement."},
+      {name:"Dumbbell Bent-Over Row", sets:"3 × 10", icon:"row", videoId:"roCP6wCXPqo", query:"dumbbell bent over row form tutorial", cue:"Flat back, pull the elbows back, squeeze the shoulder blades together.", note:"Hinge forward from the hips first, then row — don't round the spine."},
+      {name:"Kettlebell Glute Bridge", sets:"3 × 12", icon:"hinge", videoId:"-EXktk7bwSU", query:"kettlebell glute bridge form tutorial", cue:"Squeeze the glutes hard at the top, pause for a second.", note:"Rest the kettlebell across your hip crease, holding it steady with both hands."},
+      {name:"Standing Dumbbell Overhead Press", sets:"2 × 10", icon:"press", videoId:"M2rwvNhTOu0", query:"standing dumbbell overhead press form beginner", cue:"Light weight to start — control the lowering phase.", note:"Press straight up, not forward; avoid arching the lower back."},
+      {name:"Plank", sets:"3 × 20–30 sec", icon:"plank", videoId:"ASdvN_XEl_c", query:"plank proper form beginner", cue:"Straight line from shoulders to heels — don't let the hips sag.", note:"Mat exercise. Build the hold time gradually week over week."}
     ]
   },
   {
@@ -373,12 +398,12 @@ const days = [
     desc:"Upper-body led session — pressing and pulling, with a lunge pattern and a light rotational move for the core.",
     warmup:"March in place (2 min) → 10 bodyweight squats → 10 arm circles each way → 8 cat-cows → 8 hip circles each way.",
     exercises:[
-      {name:"Dumbbell Chest Press", sets:"3 × 10", icon:"press", query:"dumbbell chest press floor form tutorial", cue:"Elbows roughly 45° from the body, not flared straight out.", note:"Can be done on the floor or a bench — floor is fine as a beginner."},
-      {name:"Kettlebell Deadlift", sets:"3 × 10", icon:"hinge", query:"kettlebell deadlift form tutorial beginner", cue:"This is a hinge, not a squat — keep the back flat throughout.", note:"Set the kettlebell between your feet; stand tall by driving the hips forward."},
-      {name:"Dumbbell Single-Arm Row", sets:"3 × 10 / side", icon:"row", query:"dumbbell single arm row form tutorial", cue:"Support yourself with the other hand on a bench or your knee.", note:"Let the arm fully extend at the bottom before pulling again."},
-      {name:"Dumbbell Reverse Lunge", sets:"3 × 8 / side", icon:"lunge", query:"dumbbell reverse lunge form beginner", cue:"Step back, not down — control the descent of the back knee.", note:"Hold a light dumbbell in each hand at your sides."},
-      {name:"Kettlebell Halo", sets:"2 × 8 / side", icon:"halo", query:"kettlebell halo exercise tutorial", cue:"Slow and controlled circles around the head.", note:"Keep the core braced so the ribs don't flare as the weight passes behind you."},
-      {name:"Dead Bug", sets:"3 × 10 / side", icon:"twist", query:"dead bug exercise proper form", cue:"Keep the lower back pressed into the mat the whole time.", note:"Mat exercise. Move slowly — this is about control, not speed."}
+      {name:"Dumbbell Chest Press", sets:"3 × 10", icon:"press", videoId:"VmB1G1K7v94", query:"dumbbell chest press floor form tutorial", cue:"Elbows roughly 45° from the body, not flared straight out.", note:"Can be done on the floor or a bench — floor is fine as a beginner."},
+      {name:"Kettlebell Deadlift", sets:"3 × 10", icon:"hinge", videoId:"hinonqqzatk", query:"kettlebell deadlift form tutorial beginner", cue:"This is a hinge, not a squat — keep the back flat throughout.", note:"Set the kettlebell between your feet; stand tall by driving the hips forward."},
+      {name:"Dumbbell Single-Arm Row", sets:"3 × 10 / side", icon:"row", videoId:"dFzUjzfih7k", query:"dumbbell single arm row form tutorial", cue:"Support yourself with the other hand on a bench or your knee.", note:"Let the arm fully extend at the bottom before pulling again."},
+      {name:"Dumbbell Reverse Lunge", sets:"3 × 8 / side", icon:"lunge", videoId:"J9MpoAQCjos", query:"dumbbell reverse lunge form beginner", cue:"Step back, not down — control the descent of the back knee.", note:"Hold a light dumbbell in each hand at your sides."},
+      {name:"Kettlebell Halo", sets:"2 × 8 / side", icon:"halo", videoId:"13SFATc-mJ4", query:"kettlebell halo exercise tutorial", cue:"Slow and controlled circles around the head.", note:"Keep the core braced so the ribs don't flare as the weight passes behind you."},
+      {name:"Dead Bug", sets:"3 × 10 / side", icon:"twist", videoId:"4XLEnwUr1d8", query:"dead bug exercise proper form", cue:"Keep the lower back pressed into the mat the whole time.", note:"Mat exercise. Move slowly — this is about control, not speed."}
     ]
   },
   {
@@ -387,12 +412,12 @@ const days = [
     desc:"Introduces the flywheel for eccentric strength work, plus a kettlebell swing and a short core-stability finisher.",
     warmup:"March in place (2 min) → 10 bodyweight squats → 10 arm circles each way → 8 cat-cows → 8 hip circles each way.",
     exercises:[
-      {name:"Flywheel Squat", sets:"3 × 10", icon:"squat", query:"flywheel squat exercise tutorial", cue:"Start with low inertia — control the resisted return.", note:"The resistance builds as you pull harder on the way down, so start light."},
-      {name:"Flywheel Row / Pull", sets:"3 × 10", icon:"row", query:"flywheel row exercise tutorial", cue:"Focus on a slow, resisted return rather than speed.", note:"Use whichever attachment your flywheel unit has for a pulling motion."},
-      {name:"Kettlebell Swing", sets:"3 × 12", icon:"swing", query:"kettlebell swing form tutorial beginner", cue:"Power comes from the hips, not the arms.", note:"Start light while you learn the hip-hinge pattern that drives the swing."},
-      {name:"Dumbbell Lateral Raise", sets:"2 × 12", icon:"press", query:"dumbbell lateral raise form tutorial", cue:"Light weight, lead with the elbows, avoid shrugging the shoulders.", note:"Raise only to shoulder height — no need to go higher."},
-      {name:"Bird Dog", sets:"3 × 8 / side", icon:"plank", query:"bird dog exercise proper form", cue:"Slow and controlled — avoid letting the hips rotate open.", note:"Mat exercise. Opposite arm and leg extend together."},
-      {name:"Side Plank", sets:"2 × 15–20 sec / side", icon:"plank", query:"side plank proper form beginner", cue:"Stack the hips, keep the body in one straight line.", note:"Mat exercise. Build the hold time gradually over the six weeks."}
+      {name:"Flywheel Squat", sets:"3 × 10", icon:"squat", videoId:"XWZivNdliBs", query:"flywheel squat exercise tutorial", cue:"Start with low inertia — control the resisted return.", note:"The resistance builds as you pull harder on the way down, so start light."},
+      {name:"Flywheel Row / Pull", sets:"3 × 10", icon:"row", videoId:"j0zHdEoeHV4", query:"flywheel row exercise tutorial", cue:"Focus on a slow, resisted return rather than speed.", note:"Use whichever attachment your flywheel unit has for a pulling motion."},
+      {name:"Kettlebell Swing", sets:"3 × 12", icon:"swing", videoId:"sSESeQAir2M", query:"kettlebell swing form tutorial beginner", cue:"Power comes from the hips, not the arms.", note:"Start light while you learn the hip-hinge pattern that drives the swing."},
+      {name:"Dumbbell Lateral Raise", sets:"2 × 12", icon:"press", videoId:"3VcKaXpzqRo", query:"dumbbell lateral raise form tutorial", cue:"Light weight, lead with the elbows, avoid shrugging the shoulders.", note:"Raise only to shoulder height — no need to go higher."},
+      {name:"Bird Dog", sets:"3 × 8 / side", icon:"plank", videoId:"wiFNA3sqjCA", query:"bird dog exercise proper form", cue:"Slow and controlled — avoid letting the hips rotate open.", note:"Mat exercise. Opposite arm and leg extend together."},
+      {name:"Side Plank", sets:"2 × 15–20 sec / side", icon:"plank", videoId:"BFOyHDlY2UE", query:"side plank proper form beginner", cue:"Stack the hips, keep the body in one straight line.", note:"Mat exercise. Build the hold time gradually over the six weeks."}
     ]
   }
 ];
@@ -448,15 +473,29 @@ days.forEach((day, i) => {
           </div>
           <div>
             <div class="video-wrap">
-              <iframe loading="lazy" src="https://www.youtube.com/embed?listType=search&list=${searchQuery}" title="${ex.name} demonstrations" allowfullscreen></iframe>
+              <iframe data-src="https://www.youtube-nocookie.com/embed/${ex.videoId}" title="${ex.name} tutorial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="video-caption">Showing YouTube search results for "${ex.query}" — pick a demonstration that suits your level.</div>
+            <div class="video-caption">Form demonstration for ${ex.name}.</div>
+            <div class="video-links">
+              <a class="video-link" href="https://www.youtube.com/watch?v=${ex.videoId}" target="_blank" rel="noopener noreferrer">
+                &#9654; Open on YouTube
+              </a>
+              <a class="video-link" href="https://www.youtube.com/results?search_query=${searchQuery}" target="_blank" rel="noopener noreferrer">
+                &#128269; Search variations
+              </a>
+            </div>
           </div>
         </div>
       </div>
     `;
     card.querySelector(".exercise-head").addEventListener("click", () => {
-      card.classList.toggle("open");
+      const isOpen = card.classList.toggle("open");
+      if (isOpen) {
+        const iframe = card.querySelector("iframe[data-src]");
+        if (iframe && !iframe.src) {
+          iframe.src = iframe.dataset.src;
+        }
+      }
     });
     list.appendChild(card);
   });

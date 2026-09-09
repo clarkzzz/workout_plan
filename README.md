@@ -28,6 +28,7 @@ Once hosted on GitHub Pages, the site will be available at:
 All exercise data lives in the `days` array near the bottom of `index.html` (inside the `<script>` tag). Each exercise has:
 - `name`, `sets`, `note`, `cue` — the text shown in the card
 - `icon` — one of `squat`, `hinge`, `row`, `press`, `lunge`, `halo`, `plank`, `twist`, `swing`
-- `query` — the search term used to pull relevant YouTube demonstrations
+- `videoId` — the YouTube video ID for the embedded form demonstration
+- `query` — the search term used for finding alternate YouTube tutorials and variations
 
 Edit these values directly and re-upload to update the site — no build step required, it's a single static HTML file.
