@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundations — A Beginner Strength Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2F0EA;
+    --ink:#1C201D;
+    --ink-soft:#565f58;
+    --teal:#1F5C4D;
+    --teal-deep:#123A30;
+    --coral:#E8623A;
+    --sand:#DCCFB6;
+    --line:#cfc9ba;
+    --card:#FBFAF6;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:5.5rem 6vw 4rem;
+    background:var(--teal-deep);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    color:var(--sand);
+    font-size:0.95rem;
+    margin-bottom:1rem;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:0.98;
+    max-width:14ch;
+    color:#fff;
+  }
+  .hero p{
+    max-width:52ch;
+    margin-top:1.4rem;
+    font-size:1.1rem;
+    color:#d9dfd9;
+  }
+  .hero-stats{
+    margin-top:2.8rem;
+    display:flex;
+    gap:2.5rem;
+    flex-wrap:wrap;
+  }
+  .hero-stats div{border-left:2px solid var(--coral); padding-left:0.8rem;}
+  .hero-stats b{display:block; font-family:'Bricolage Grotesque',sans-serif; font-size:1.6rem;}
+  .hero-stats span{font-size:0.85rem; color:#b9c2ba;}
+
+  .hero-figure{
+    position:absolute;
+    right:6vw; top:50%;
+    transform:translateY(-50%);
+    opacity:0.9;
+  }
+  @media (max-width:900px){ .hero-figure{display:none;} }
+
+  /* ---------- NAV / DAY TABS ---------- */
+  .day-nav{
+    position:sticky; top:0; z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    padding:0 6vw;
+    overflow-x:auto;
+  }
+  .day-nav button{
+    font-family:'Bricolage Grotesque',sans-serif;
+    font-size:1rem;
+    font-weight:700;
+    background:none;
+    border:none;
+    color:var(--ink-soft);
+    padding:1.1rem 1.3rem;
+    cursor:pointer;
+    white-space:nowrap;
+    border-bottom:3px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .day-nav button.active{
+    color:var(--ink);
+    border-bottom-color:var(--coral);
+  }
+  .day-nav button:hover{ color:var(--ink); }
+
+  /* ---------- MAIN ---------- */
+  main{ padding:3rem 6vw 5rem; max-width:1000px; margin:0 auto; }
+  .day-panel{ display:none; }
+  .day-panel.active{ display:block; animation:fadeIn .35s ease; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+
+  .day-head{ margin-bottom:2rem; }
+  .day-head h2{ font-size:clamp(1.6rem,3.4vw,2.3rem); }
+  .day-head p{ color:var(--ink-soft); max-width:60ch; margin-top:.5rem; }
+
+  .warmup{
+    background:var(--sand);
+    border-radius:var(--radius);
+    padding:1.2rem 1.5rem;
+    margin-bottom:2rem;
+    font-size:0.95rem;
+  }
+  .warmup b{font-family:'Bricolage Grotesque',sans-serif;}
+
+  /* ---------- EXERCISE CARD ---------- */
+  .exercise{
+    background:var(--card);
+    border:1px solid var(--line);
+    margin-bottom:1rem;
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .exercise-head{
+    display:flex;
+    align-items:center;
+    gap:1.2rem;
+    padding:1.1rem 1.4rem;
+    cursor:pointer;
+    user-select:none;
+  }
+  .ex-icon{
+    flex:0 0 auto;
+    width:52px; height:52px;
+  }
+  .ex-meta{ flex:1 1 auto; }
+  .ex-meta h3{ font-size:1.15rem; }
+  .ex-sets{
+    color:var(--teal);
+    font-weight:600;
+    font-size:0.9rem;
+    margin-top:0.15rem;
+  }
+  .chevron{
+    width:14px; height:14px;
+    border-right:2px solid var(--ink-soft);
+    border-bottom:2px solid var(--ink-soft);
+    transform:rotate(45deg);
+    transition:transform .25s;
+    flex:0 0 auto;
+  }
+  .exercise.open .chevron{ transform:rotate(-135deg); }
+
+  .exercise-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+    border-top:1px solid var(--line);
+  }
+  .exercise.open .exercise-body{ max-height:900px; }
+  .exercise-body-inner{
+    padding:1.4rem;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+  }
+  @media (max-width:700px){ .exercise-body-inner{ grid-template-columns:1fr; } }
+
+  .ex-notes p{ margin:0 0 .8rem; font-size:0.95rem; }
+  .ex-notes .cue{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    border-left:2px solid var(--coral);
+    padding-left:.7rem;
+  }
+  .video-wrap{
+    position:relative; width:100%;
+    padding-top:56.25%;
+    background:#0b0d0c;
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .video-wrap iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0;
+  }
+  .video-caption{ font-size:0.75rem; color:var(--ink-soft); margin-top:.4rem; }
+
+  /* ---------- COOLDOWN ---------- */
+  .cooldown{
+    margin-top:2.5rem;
+    background:var(--teal);
+    color:#eef3ef;
+    padding:1.4rem 1.6rem;
+    border-radius:var(--radius);
+  }
+  .cooldown h3{ color:#fff; margin-bottom:.6rem; }
+  .cooldown ul{ margin:0; padding-left:1.2rem; }
+
+  footer{
+    padding:2.5rem 6vw 3.5rem;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+    border-top:1px solid var(--line);
+  }
+
+  /* ---------- SVG animation keyframes ---------- */
+  @keyframes moveSquat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(9px);} }
+  @keyframes moveHinge{ 0%,100%{ transform:rotate(0deg);} 50%{ transform:rotate(28deg);} }
+  @keyframes moveRow{ 0%,100%{ transform:translateX(0);} 50%{ transform:translateX(-8px);} }
+  @keyframes movePress{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+  @keyframes moveLunge{ 0%,100%{ transform:translateY(0) rotate(0deg);} 50%{ transform:translateY(6px) rotate(-6deg);} }
+  @keyframes moveHalo{ 0%{ transform:rotate(0deg);} 100%{ transform:rotate(360deg);} }
+  @keyframes movePlank{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-2px);} }
+  @keyframes moveTwist{ 0%,100%{ transform:rotate(-14deg);} 50%{ transform:rotate(14deg);} }
+  @keyframes moveSwing{ 0%,100%{ transform:rotate(-24deg);} 50%{ transform:rotate(24deg);} }
+
+  .anim-part{ transform-origin:center; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-eyebrow">A three-day plan &middot; dumbbell, kettlebell, flywheel, mat</div>
+  <h1>Foundations</h1>
+  <p>A beginner-friendly strength plan built for steady, sustainable progress — three full-body sessions a week, form-first, six weeks to a stronger baseline.</p>
+  <div class="hero-stats">
+    <div><b>3</b><span>sessions / week</span></div>
+    <div><b>6</b><span>exercises / session</span></div>
+    <div><b>6</b><span>week base cycle</span></div>
+  </div>
+</section>
+
+<nav class="day-nav" id="dayNav"></nav>
+
+<main id="main"></main>
+
+<footer>
+  Built as a personal training reference. Videos link to YouTube search results for each movement — always check that a demonstration matches your equipment and ability before following it. If any exercise causes joint pain, stop and modify. Consult a doctor or physiotherapist before starting if you have existing injuries or health conditions.
+</footer>
+
+<script>
+/* ---------------- ICONS ---------------- */
+const ink = "#1C201D", teal="#1F5C4D", coral="#E8623A";
+
+function iconSquat(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="26" cy="10" r="5" fill="${teal}"/>
+  <g class="anim-part" style="animation:moveSquat 1.6s ease-in-out infinite; transform-box: fill-box;">
+    <rect x="21" y="17" width="10" height="18" rx="3" fill="${ink}"/>
+    <rect x="14" y="19" width="24" height="5" rx="2.5" fill="${coral}"/>
+  </g>
+  <line x1="20" y1="35" x2="16" y2="47" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+  <line x1="32" y1="35" x2="36" y2="47" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+</svg>`;}
+
+function iconHinge(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="16" cy="9" r="5" fill="${teal}"/>
+  <g class="anim-part" style="animation:moveHinge 1.8s ease-in-out infinite; transform-box: fill-box; transform-origin: 30px 30px;">
+    <rect x="13" y="14" width="9" height="20" rx="3" fill="${ink}"/>
+  </g>
+  <line x1="17" y1="34" x2="17" y2="47" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+  <rect x="30" y="24" width="6" height="14" rx="2" fill="${coral}"/>
+</svg>`;}
+
+function iconRow(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="26" cy="10" r="5" fill="${teal}"/>
+  <rect x="21" y="16" width="10" height="20" rx="3" fill="${ink}"/>
+  <g class="anim-part" style="animation:moveRow 1.4s ease-in-out infinite; transform-box: fill-box;">
+    <rect x="30" y="20" width="14" height="5" rx="2.5" fill="${coral}"/>
+  </g>
+  <line x1="22" y1="36" x2="19" y2="48" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+  <line x1="30" y1="36" x2="33" y2="48" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+</svg>`;}
+
+function iconPress(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="26" cy="16" r="5" fill="${teal}"/>
+  <rect x="21" y="22" width="10" height="16" rx="3" fill="${ink}"/>
+  <g class="anim-part" style="animation:movePress 1.5s ease-in-out infinite; transform-box: fill-box;">
+    <rect x="15" y="6" width="22" height="5" rx="2.5" fill="${coral}"/>
+  </g>
+  <line x1="22" y1="38" x2="19" y2="48" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+  <line x1="30" y1="38" x2="33" y2="48" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+</svg>`;}
+
+function iconLunge(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="24" cy="9" r="5" fill="${teal}"/>
+  <g class="anim-part" style="animation:moveLunge 1.6s ease-in-out infinite; transform-box: fill-box;">
+    <rect x="19" y="15" width="10" height="18" rx="3" fill="${ink}"/>
+  </g>
+  <line x1="21" y1="33" x2="14" y2="47" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+  <line x1="27" y1="33" x2="34" y2="43" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+  <line x1="34" y1="43" x2="30" y2="47" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+</svg>`;}
+
+function iconHalo(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="26" cy="26" r="5" fill="${teal}"/>
+  <rect x="21" y="30" width="10" height="16" rx="3" fill="${ink}"/>
+  <g class="anim-part" style="animation:moveHalo 2.4s linear infinite; transform-box: fill-box; transform-origin:26px 26px;">
+    <circle cx="26" cy="12" r="4.5" fill="${coral}"/>
+  </g>
+</svg>`;}
+
+function iconPlank(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="10" cy="30" r="5" fill="${teal}"/>
+  <g class="anim-part" style="animation:movePlank 1.8s ease-in-out infinite; transform-box: fill-box;">
+    <rect x="14" y="27" width="30" height="6" rx="3" fill="${ink}"/>
+  </g>
+  <line x1="38" y1="30" x2="45" y2="40" stroke="${coral}" stroke-width="3" stroke-linecap="round"/>
+</svg>`;}
+
+function iconTwist(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="26" cy="14" r="5" fill="${teal}"/>
+  <rect x="21" y="20" width="10" height="16" rx="3" fill="${ink}"/>
+  <g class="anim-part" style="animation:moveTwist 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 26px 24px;">
+    <rect x="14" y="22" width="24" height="5" rx="2.5" fill="${coral}"/>
+  </g>
+</svg>`;}
+
+function iconSwing(){return `
+<svg viewBox="0 0 52 52" fill="none">
+  <circle cx="26" cy="10" r="5" fill="${teal}"/>
+  <rect x="21" y="16" width="10" height="16" rx="3" fill="${ink}"/>
+  <g class="anim-part" style="animation:moveSwing 1.3s ease-in-out infinite; transform-box: fill-box; transform-origin: 26px 32px;">
+    <rect x="23" y="32" width="6" height="12" rx="2" fill="${coral}"/>
+  </g>
+</svg>`;}
+
+const ICONS = {squat:iconSquat, hinge:iconHinge, row:iconRow, press:iconPress, lunge:iconLunge, halo:iconHalo, plank:iconPlank, twist:iconTwist, swing:iconSwing};
+
+/* ---------------- DATA ---------------- */
+const days = [
+  {
+    id:"a", label:"Day 1 · Lower Emphasis",
+    title:"Full Body Strength A",
+    desc:"Lower-body led session — squat and hinge patterns, plus rowing and pressing to keep the upper body balanced.",
+    warmup:"March in place (2 min) → 10 bodyweight squats → 10 arm circles each way → 8 cat-cows → 8 hip circles each way.",
+    exercises:[
+      {name:"Kettlebell Goblet Squat", sets:"3 × 10", icon:"squat", query:"kettlebell goblet squat form tutorial", cue:"Chest up, sit your hips back, drive through your heels.", note:"The core squat pattern of the whole plan — worth spending real time getting comfortable here."},
+      {name:"Dumbbell Romanian Deadlift", sets:"3 × 10", icon:"hinge", query:"dumbbell romanian deadlift form beginner", cue:"Soft knees, hinge at the hips, feel a stretch through the hamstrings.", note:"Keep the dumbbells close to your legs throughout the movement."},
+      {name:"Dumbbell Bent-Over Row", sets:"3 × 10", icon:"row", query:"dumbbell bent over row form tutorial", cue:"Flat back, pull the elbows back, squeeze the shoulder blades together.", note:"Hinge forward from the hips first, then row — don't round the spine."},
+      {name:"Kettlebell Glute Bridge", sets:"3 × 12", icon:"hinge", query:"kettlebell glute bridge form tutorial", cue:"Squeeze the glutes hard at the top, pause for a second.", note:"Rest the kettlebell across your hip crease, holding it steady with both hands."},
+      {name:"Standing Dumbbell Overhead Press", sets:"2 × 10", icon:"press", query:"standing dumbbell overhead press form beginner", cue:"Light weight to start — control the lowering phase.", note:"Press straight up, not forward; avoid arching the lower back."},
+      {name:"Plank", sets:"3 × 20–30 sec", icon:"plank", query:"plank proper form beginner", cue:"Straight line from shoulders to heels — don't let the hips sag.", note:"Mat exercise. Build the hold time gradually week over week."}
+    ]
+  },
+  {
+    id:"b", label:"Day 3 · Upper Emphasis",
+    title:"Full Body Strength B",
+    desc:"Upper-body led session — pressing and pulling, with a lunge pattern and a light rotational move for the core.",
+    warmup:"March in place (2 min) → 10 bodyweight squats → 10 arm circles each way → 8 cat-cows → 8 hip circles each way.",
+    exercises:[
+      {name:"Dumbbell Chest Press", sets:"3 × 10", icon:"press", query:"dumbbell chest press floor form tutorial", cue:"Elbows roughly 45° from the body, not flared straight out.", note:"Can be done on the floor or a bench — floor is fine as a beginner."},
+      {name:"Kettlebell Deadlift", sets:"3 × 10", icon:"hinge", query:"kettlebell deadlift form tutorial beginner", cue:"This is a hinge, not a squat — keep the back flat throughout.", note:"Set the kettlebell between your feet; stand tall by driving the hips forward."},
+      {name:"Dumbbell Single-Arm Row", sets:"3 × 10 / side", icon:"row", query:"dumbbell single arm row form tutorial", cue:"Support yourself with the other hand on a bench or your knee.", note:"Let the arm fully extend at the bottom before pulling again."},
+      {name:"Dumbbell Reverse Lunge", sets:"3 × 8 / side", icon:"lunge", query:"dumbbell reverse lunge form beginner", cue:"Step back, not down — control the descent of the back knee.", note:"Hold a light dumbbell in each hand at your sides."},
+      {name:"Kettlebell Halo", sets:"2 × 8 / side", icon:"halo", query:"kettlebell halo exercise tutorial", cue:"Slow and controlled circles around the head.", note:"Keep the core braced so the ribs don't flare as the weight passes behind you."},
+      {name:"Dead Bug", sets:"3 × 10 / side", icon:"twist", query:"dead bug exercise proper form", cue:"Keep the lower back pressed into the mat the whole time.", note:"Mat exercise. Move slowly — this is about control, not speed."}
+    ]
+  },
+  {
+    id:"c", label:"Day 5 · Flywheel + Core",
+    title:"Full Body + Flywheel + Core",
+    desc:"Introduces the flywheel for eccentric strength work, plus a kettlebell swing and a short core-stability finisher.",
+    warmup:"March in place (2 min) → 10 bodyweight squats → 10 arm circles each way → 8 cat-cows → 8 hip circles each way.",
+    exercises:[
+      {name:"Flywheel Squat", sets:"3 × 10", icon:"squat", query:"flywheel squat exercise tutorial", cue:"Start with low inertia — control the resisted return.", note:"The resistance builds as you pull harder on the way down, so start light."},
+      {name:"Flywheel Row / Pull", sets:"3 × 10", icon:"row", query:"flywheel row exercise tutorial", cue:"Focus on a slow, resisted return rather than speed.", note:"Use whichever attachment your flywheel unit has for a pulling motion."},
+      {name:"Kettlebell Swing", sets:"3 × 12", icon:"swing", query:"kettlebell swing form tutorial beginner", cue:"Power comes from the hips, not the arms.", note:"Start light while you learn the hip-hinge pattern that drives the swing."},
+      {name:"Dumbbell Lateral Raise", sets:"2 × 12", icon:"press", query:"dumbbell lateral raise form tutorial", cue:"Light weight, lead with the elbows, avoid shrugging the shoulders.", note:"Raise only to shoulder height — no need to go higher."},
+      {name:"Bird Dog", sets:"3 × 8 / side", icon:"plank", query:"bird dog exercise proper form", cue:"Slow and controlled — avoid letting the hips rotate open.", note:"Mat exercise. Opposite arm and leg extend together."},
+      {name:"Side Plank", sets:"2 × 15–20 sec / side", icon:"plank", query:"side plank proper form beginner", cue:"Stack the hips, keep the body in one straight line.", note:"Mat exercise. Build the hold time gradually over the six weeks."}
+    ]
+  }
+];
+
+/* ---------------- RENDER ---------------- */
+const nav = document.getElementById("dayNav");
+const main = document.getElementById("main");
+
+days.forEach((day, i) => {
+  const btn = document.createElement("button");
+  btn.textContent = day.label;
+  btn.dataset.target = day.id;
+  if(i===0) btn.classList.add("active");
+  btn.addEventListener("click", () => selectDay(day.id));
+  nav.appendChild(btn);
+
+  const panel = document.createElement("section");
+  panel.className = "day-panel" + (i===0 ? " active" : "");
+  panel.id = "panel-" + day.id;
+
+  panel.innerHTML = `
+    <div class="day-head">
+      <h2>${day.title}</h2>
+      <p>${day.desc}</p>
+    </div>
+    <div class="warmup"><b>Warm-up (5–8 min):</b> ${day.warmup}</div>
+    <div class="exercise-list"></div>
+    <div class="cooldown">
+      <h3>Cooldown</h3>
+      <p>Finish with 3–5 minutes of easy stretching focused on whatever felt tightest today — hips, hamstrings, chest, or shoulders.</p>
+    </div>
+  `;
+
+  const list = panel.querySelector(".exercise-list");
+  day.exercises.forEach((ex, idx) => {
+    const card = document.createElement("article");
+    card.className = "exercise";
+    const searchQuery = encodeURIComponent(ex.query);
+    card.innerHTML = `
+      <div class="exercise-head">
+        <div class="ex-icon">${ICONS[ex.icon]()}</div>
+        <div class="ex-meta">
+          <h3>${ex.name}</h3>
+          <div class="ex-sets">${ex.sets}</div>
+        </div>
+        <div class="chevron"></div>
+      </div>
+      <div class="exercise-body">
+        <div class="exercise-body-inner">
+          <div class="ex-notes">
+            <p>${ex.note}</p>
+            <p class="cue">${ex.cue}</p>
+          </div>
+          <div>
+            <div class="video-wrap">
+              <iframe loading="lazy" src="https://www.youtube.com/embed?listType=search&list=${searchQuery}" title="${ex.name} demonstrations" allowfullscreen></iframe>
+            </div>
+            <div class="video-caption">Showing YouTube search results for "${ex.query}" — pick a demonstration that suits your level.</div>
+          </div>
+        </div>
+      </div>
+    `;
+    card.querySelector(".exercise-head").addEventListener("click", () => {
+      card.classList.toggle("open");
+    });
+    list.appendChild(card);
+  });
+
+  main.appendChild(panel);
+});
+
+function selectDay(id){
+  document.querySelectorAll(".day-nav button").forEach(b => b.classList.toggle("active", b.dataset.target === id));
+  document.querySelectorAll(".day-panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + id));
+}
+</script>
+</body>
+</html>
