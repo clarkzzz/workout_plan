@@ -1,6 +1,6 @@
 # Foundations — Beginner Strength Plan
 
-An interactive, single-page version of a beginner-friendly 3-day strength plan (dumbbell, kettlebell, flywheel, mat). Includes lightweight animated icons for each movement pattern and embedded YouTube demonstrations for every exercise.
+An interactive, single-page version of a beginner-friendly 3-day strength plan (dumbbell, kettlebell, mat). Includes lightweight animated icons for each movement pattern and embedded YouTube demonstrations for every exercise.
 
 ## View it live
 
